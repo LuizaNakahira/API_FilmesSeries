@@ -10,7 +10,7 @@ const reviewModel = require("../model/review");
 const workModel = require("../model/work");
 
 router.get("/", async (req, res) => {
-  //Sincroniza o banco de dados
+ 
   await sequelize.sync({ force: true });
 
   let users = [

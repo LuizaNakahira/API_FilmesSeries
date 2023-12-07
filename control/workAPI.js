@@ -87,11 +87,13 @@ router.delete("/:id", validaToken, async (req, res) => {
   }
 });
 
-router.get("/checkAge/:title/:age", validaToken, async (req, res) => {
-  const { title, age } = req.params;
+//Rota especial
+router.get("/:id/checkAge", validaToken, async (req, res) => {
+  const id = req.params.id;
+  const { age } = req.body;
 
   try {
-    const isAgeValid = await workMod.checkAge(title, parseInt(age));
+    const isAgeValid = await workMod.checkAge(id, parseInt(age));
     if (isAgeValid) {
       res.json(success({ isValid: true, message: "Você pode ver este filme!" }));
     } else {

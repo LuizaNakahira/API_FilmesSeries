@@ -18,7 +18,7 @@ function checkAdmin(req, res, next) {
 
 //Verificar o Token
 function validaToken(req, res, next) {
-  //Extrai o token do cabeçalho da requisição
+  
   const token = req.headers.authorization;
 
   if (!token) {
@@ -38,7 +38,6 @@ function validaToken(req, res, next) {
         return res.status(401).json(fail("Usuário não foi encontrado!"));
       }
 
-      //Adiciona as informações do user no obj de requisição
       req.user = {
         id: user.id,
         login: user.login,
@@ -56,13 +55,12 @@ function validaToken(req, res, next) {
   });
 }
 
-//Fazendo Login e devolvendo um Token
 router.post("/login", async (req, res) => {
   const { login, password } = req.body;
 
   const user = await userMod.getByLogin(login);
   if (user && user.password === password) {
-    // await userMod.contUser(user.id);
+   
     const token = jwt.sign({ login }, process.env.TOKEN_KEY, {
       expiresIn: "24h",
     });

@@ -77,8 +77,14 @@ module.exports = {
     return await workModel.findByPk(id);
   },
 
-  getByName: async function (name) {
-    return await workModel.findOne({ where: { title: title } });
+  checkAge: async function (title, age) {
+    const work = await workModel.findOne({ where: { title: title } });
+    if (!work) {
+      return false; // Returns false if the work is not found
+    }
+  
+    const isAgeValid = age >= work.ageGroup;
+    return isAgeValid;
   },
 
   Model: workModel    

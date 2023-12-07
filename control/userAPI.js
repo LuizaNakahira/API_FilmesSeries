@@ -111,7 +111,7 @@ router.get("/:id", validaToken, async (req, res) => {
 });
 
 //Cria um novo usuário
-router.post("/",/* validaToken, checkAdmin,*/ async (req, res) => {
+router.post("/", validaToken, checkAdmin, async (req, res) => {
   const { login, password, isAdmin } = req.body;
 
   try {

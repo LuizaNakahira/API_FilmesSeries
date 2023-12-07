@@ -78,7 +78,7 @@ router.put("/:id", validaToken, async (req, res) => {
   }
 });
 
-router.delete("/:id", /*validaToken,*/async (req, res) => {
+router.delete("/:id", validaToken, async (req, res) => {
   let atualizacao = await reviewMod.delete(req.params.id);
   if (atualizacao) {
     res.json(success(atualizacao));

@@ -43,7 +43,7 @@ router.get("/", validaToken, async (req, res) => {
   }
 });
 
-router.get("/:id", /* validaToken,*/ async (req, res) => {
+router.get("/:id", validaToken, async (req, res) => {
   let work = await workMod.getById(req.params.id);
   if (work) {
     res.json(success(work));
@@ -52,7 +52,7 @@ router.get("/:id", /* validaToken,*/ async (req, res) => {
   }
 });
 
-router.post("/",/* validaToken,*/ async (req, res) => {
+router.post("/", validaToken, async (req, res) => {
   const { title, description, year, categorie, ageGroup, time } = req.body;
 
   try {
@@ -78,7 +78,7 @@ router.put("/:id", validaToken, async (req, res) => {
   }
 });
 
-router.delete("/:id",/* validaToken, */async (req, res) => {
+router.delete("/:id", validaToken, async (req, res) => {
   let result = await workMod.delete(req.params.id);
   if (result) {
     res.json(success(result));
@@ -86,5 +86,22 @@ router.delete("/:id",/* validaToken, */async (req, res) => {
     res.status(500).json(fail("Obra não encontrada!"));
   }
 });
+
+router.get("/checkAge/:title/:age", validaToken, async (req, res) => {
+  const { title, age } = req.params;
+
+  try {
+    const isAgeValid = await workMod.checkAge(title, parseInt(age));
+    if (isAgeValid) {
+      res.json(success({ isValid: true, message: "Você pode ver este filme!" }));
+    } else {
+      res.json(success({ isValid: false, message: "Não recomendado você ver este filme. Você é muito novo!" }));
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(fail("Erro ao verificar a idade!"));
+  }
+});
+
 
 module.exports = router;

@@ -12,6 +12,11 @@ app.use('/users', require('./control/userAPI'))
 app.use('/install', require('./control/installAPI'))
 app.use('/reviews', require('./control/reviewAPI'))
 app.use('/works',require('./control/workAPI'))
+ 
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger_doc.json')
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 app.listen(3001, () => {
     console.log('App running....')

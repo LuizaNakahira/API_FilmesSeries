@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "swagger-autogen": "node swagger.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +16,9 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.4.2",
-    "sequelize": "^6.32.1"
+    "sequelize": "^6.32.1",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui": "^5.10.3",
+    "swagger-ui-express": "^5.0.0"
   }
 }
